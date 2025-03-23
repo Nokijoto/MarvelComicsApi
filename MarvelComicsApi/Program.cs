@@ -12,15 +12,31 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAdditionalServices();
-builder.Services.AddDatabaseConnection();
-var connectionString = Environment.GetEnvironmentVariable("DefaultConnection") 
-                       ?? builder.Configuration["DefaultConnection"];
-
-Console.WriteLine($"Connection string: {connectionString}");
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration["DefaultConnection"]));
+builder.Services.AddDatabaseConnection(builder.Configuration);
 
 var app = builder.Build();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    try
+    {
+        if (dbContext.Database.CanConnect())
+        {
+            Console.WriteLine("✅ Połączenie z bazą danych SQLite zostało nawiązane.");
+        }
+        else
+        {
+            Console.WriteLine("❌ Nie można połączyć się z bazą danych.");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"❌ Błąd połączenia z bazą danych: {ex.Message}");
+    }
+}
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -29,6 +45,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+// using (var scope = app.Services.CreateScope())
+// {
+//     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+//     dbContext.SeedDataBase(); // Wywołanie metody seedującej
+// }
 app.UseAuthorization();
 
 app.MapControllers();

@@ -19,10 +19,13 @@ public static class ServiceCollectionExtension
     }
     
     
-    public static IServiceCollection AddDatabaseConnection(this IServiceCollection services)
+    public static IServiceCollection AddDatabaseConnection(this IServiceCollection services, IConfiguration configuration)
     {
+        var connectionString = configuration.GetConnectionString("localDb");
+
         services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlite(Environment.GetEnvironmentVariable("DefaultConnection")));
+            options.UseSqlite(connectionString));
+        
         return services;
     }       
 }
