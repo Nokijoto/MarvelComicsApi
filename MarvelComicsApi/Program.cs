@@ -1,6 +1,5 @@
 using MarvelComicsApi.DbConn;
 using MarvelComicsApi.Extensions;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,12 +44,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-// using (var scope = app.Services.CreateScope())
-// {
-//     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-//     dbContext.SeedDataBase(); // Wywołanie metody seedującej
-// }
 app.UseAuthorization();
 
 app.MapControllers();

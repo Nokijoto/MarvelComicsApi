@@ -21,7 +21,7 @@ public class ComicController : ControllerBase
     {
         try
         {
-            var result = _comicService.GetComic();
+            var result = await _comicService.GetComic();
             return Ok(result);
         }
         catch (Exception e)
