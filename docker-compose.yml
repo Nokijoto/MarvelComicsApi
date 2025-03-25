@@ -5,3 +5,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ConnectionStrings__PostgresConnection=${ConnectionStrings__PostgresConnection}
+      - MySecretKey=${MySecretKey}
+    networks:
+      - marvelapi-network
+networks:
+  marvelapi-network:
+    external: true
