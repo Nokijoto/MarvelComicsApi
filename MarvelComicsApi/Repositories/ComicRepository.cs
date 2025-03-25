@@ -9,9 +9,11 @@ namespace MarvelComicsApi.Repositories;
 public class ComicRepository : IComicRepository
 {
     private readonly AppDbContext _dbContext;
-    public ComicRepository(AppDbContext dbContext)
+    private readonly ILogger<ComicRepository> _logger;
+    public ComicRepository(AppDbContext dbContext, ILogger<ComicRepository> logger)
     {
         _dbContext = dbContext;
+        _logger = logger;
     }
         
     public async Task<ComicDto> GetComic()
