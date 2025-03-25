@@ -25,7 +25,7 @@ RUN dotnet build MarvelComicsApi.csproj -c $BUILD_CONFIGURATION -o /app/build
 # Publikowanie projektu
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish MarvleComicsApi.csproj -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish MarvelComicsApi.csproj -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Finalny obraz
 FROM base AS final
