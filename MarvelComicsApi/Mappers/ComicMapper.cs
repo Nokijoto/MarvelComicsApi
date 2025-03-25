@@ -9,6 +9,7 @@ public static class ComicMapper
     {
         return new Comic()
         {
+            Id = comic.Id,
             ActiveYears = comic.ActiveYears,
             ComicName = comic.ComicName,
             CoverArtist = comic.CoverArtist,
@@ -21,6 +22,9 @@ public static class ComicMapper
             Imprint = comic.Imprint,
             Price = comic.Price,
             Rating = comic.Rating,
+            CreatedAt = comic.CreatedAt,
+            UpdatedAt = comic.UpdatedAt,
+            DeletedAt = comic.DeletedAt,
         };
     }
     
@@ -28,6 +32,7 @@ public static class ComicMapper
     {
         return new ComicDto()
         {
+            Id = comic.Id,
             ActiveYears = comic.ActiveYears,
             ComicName = comic.ComicName,
             CoverArtist = comic.CoverArtist,
@@ -40,6 +45,9 @@ public static class ComicMapper
             Imprint = comic.Imprint,
             Price = comic.Price,
             Rating = comic.Rating,
+            CreatedAt = comic.CreatedAt,
+            UpdatedAt = comic.UpdatedAt,
+            DeletedAt = comic.DeletedAt,
         };
     }
 }
