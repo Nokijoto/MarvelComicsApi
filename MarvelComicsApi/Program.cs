@@ -3,7 +3,8 @@ using MarvelComicsApi.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var connectionString = builder.Configuration["ConnectionStrings:PostgresConnection"];
+Console.WriteLine("🔗 Connection string (z IConfiguration): " + connectionString);
 // Add services to the container.
 
 builder.Services.AddControllers();
