@@ -11,6 +11,8 @@ services:
       - MySecretKey=${MySecretKey}
     networks:
       - marvelapi-network
+    volumes:
+      - ${ENV_FILE}:/app/.env
 networks:
   marvelapi-network:
     external: true
