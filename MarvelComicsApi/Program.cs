@@ -1,11 +1,9 @@
+using System.Collections;
 using MarvelComicsApi.DbConn;
 using MarvelComicsApi.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration["ConnectionStrings:PostgresConnection"];
-Console.WriteLine("🔗 Connection string (z IConfiguration): " + connectionString);
-// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -16,6 +14,21 @@ builder.Services.AddAdditionalServices();
 builder.Services.AddDatabaseConnection(builder.Configuration);
 
 var app = builder.Build();
+
+Console.WriteLine("🔧 Konfiguracja aplikacji:");
+
+foreach (var kv in builder.Configuration.AsEnumerable())
+    if (!string.IsNullOrEmpty(kv.Value))
+        Console.WriteLine($"  🔹 {kv.Key} = {kv.Value}");
+
+Console.WriteLine("🌍 Zmienne środowiskowe (ENV):");
+foreach (DictionaryEntry env in Environment.GetEnvironmentVariables())
+{
+    var key = env.Key?.ToString();
+    var value = env.Value?.ToString();
+    if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(value))
+        Console.WriteLine($"  🌱 {key} = {value}");
+}
 
 
 using (var scope = app.Services.CreateScope())
