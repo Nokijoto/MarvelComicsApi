@@ -24,7 +24,7 @@ using (var scope = app.Services.CreateScope())
     {
         if (dbContext.Database.CanConnect())
         {
-            Console.WriteLine("✅ Połączenie z bazą danych SQLite zostało nawiązane.");
+            Console.WriteLine("✅ Połączenie z bazą danych zostało nawiązane.");
             if (dbContext.Database.GetPendingMigrations().Any()) dbContext.Database.Migrate();
             Console.WriteLine("✅ Baza danych została zaktualizowana.");
         }
