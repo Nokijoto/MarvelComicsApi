@@ -71,8 +71,14 @@ using (var scope = app.Services.CreateScope())
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    Console.WriteLine("🚀 Konfiguracja debugowania.");
+    var swaggerEnabled = Environment.GetEnvironmentVariable("SWAGGER_ENABLED") == "true";
+    if (swaggerEnabled)
+    {
+        Console.WriteLine("🔍 Swagger jest włączony.");
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
 }
 
 
