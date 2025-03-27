@@ -3,7 +3,7 @@
 namespace MarvelComicsApi.Controllers;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("[controller]")]
 public class VersionController
 {
     [HttpGet]
