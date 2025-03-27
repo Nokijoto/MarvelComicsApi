@@ -11,6 +11,8 @@ services:
       - MySecretKey=${MySecretKey}
     networks:
       - marvelapi-network
+    env_file:
+      - stack.env
 networks:
   marvelapi-network:
     external: true
